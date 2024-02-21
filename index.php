@@ -1,8 +1,8 @@
 <?php
 include('templates/header.php');
-include('navbar.php');
+include('templates/navbar.php');
 ?>
  
 <?php
-include('footer.php');
+include('templates/footer.php');
 ?>
