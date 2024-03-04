@@ -1,13 +1,6 @@
-<div
-    data-aos="fade-up"
-    data-aos-delay="50"
-    data-aos-duration="1000"
-    data-aos-easing="ease-in-out"
-    data-aos-once="false"
-    data-aos-anchor-placement="top-center"
-    ><nav class="navbar navbar-expand-lg navbar-light rounded-1 mt-1" style="background-color: #e3f2fd;">
+<div class="sticky-top "><nav class="navbar navbar-expand-lg navbar-light rounded-1 mt-1" style="background-color: #e3f2fd;">
   <div class="container-fluid">
-    <a class="navbar-brand text-success " href="#" >AUCTION</a>
+    <a class="navbar-brand text-primary fw-bold " href="#" >AUCTION</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

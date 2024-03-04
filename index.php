@@ -1,7 +1,8 @@
 <?php
 include('templates/header.php');
 include('templates/navbar.php');
-include('templates/feed.php');
+include('templates/left.php');
+include('classes/feed.php');
 ?>
 
 <script src="./public/js/jquery.js"></script>
@@ -11,7 +12,7 @@ include('templates/feed.php');
 
     function loadMore(start) {
         jQuery.ajax({
-            url: 'classes/feed.php',
+            url: 'includes/feed.php',
             data: 'start=' + start,
             type: 'post',
             success: function(result) {
