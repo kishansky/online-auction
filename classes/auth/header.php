@@ -1,3 +1,9 @@
+<?php
+include "config.php";
+ob_start();
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +45,7 @@
         <div class="col-12 col-sm-6">
                 <div class="row text-center auction justify-content-center align-items-center">
 
-                    <h1 class="text-primary  fw-bold " data-aos="fade-in" data-aos-duration="3000">AUCTION</h1>
+                    <h1 class="text-primary  fw-bold" style="text-shadow: 2px 2px 6px grey;" data-aos="fade-in" data-aos-duration="3000">AUCTION</h1>
                 </div>
 
             </div>
