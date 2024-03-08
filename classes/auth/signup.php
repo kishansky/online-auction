@@ -4,41 +4,43 @@ include "header.php";
 $genOtp = rand(1000, 9999);
 ?>
 <div class="col-12 col-sm-6">
-    <div class="row vh-100 text-center  justify-content-center align-items-center px-2">
-        <div class="chaudai w-sm-50 border border-1 h-auto m-2 rounded-3 bg-white shadow-lg" data-aos="flip-left" data-aos-duration="2000">
-            <div data-aos="fade" data-aos-duration="2000" data-aos-delay="1000">
-                <form action="">
-                    <div class="my-2 p-2">
-                        <input id="name" class="w-100 p-3 rounded-2 border border-1 form-control" type="text" placeholder="Full Name" name="name">
-                    </div>
-                    <div class="my-2 p-2">
-                        <input id="email" class="w-100 p-3 rounded-2 border border-1 form-control" type="email" placeholder="Email" name="email">
-                    </div>
-                    <div class="my-2 p-2">
-                        <input id="password" class="w-100 p-3 rounded-2 border border-1 form-control" type="password" placeholder="Password" name="password">
-                    </div>
-                    <span class="my-2 p-2" id="massage">
-                    </span>
-                    <div class="my-2 p-2">
-                        <li id="otp" class="btn btn-primary w-100 p-2">Send OTP</li>
-                    </div>
-                    <div id="hide" class="d-none">
-                    <div class="my-2 p-2">
-                        <input id="code" class="w-100 p-3 rounded-2 border border-1 form-control" type="password" placeholder="OTP" name="otp">
-                    </div>
-                        <div class="my-2 p-2">
-                            <button id="signup" name="signup" type="submit" value="Submit" class="btn btn-success w-100 p-2" >Signup</button>
-                        </div>
-                    </div>
+	<div class="row vh-100 text-center  justify-content-center align-items-center px-2">
+		<div class="chaudai w-sm-50 border border-1 h-auto m-2 rounded-3 bg-white shadow-lg" data-aos="flip-left" data-aos-duration="2000">
+			<div data-aos="fade" data-aos-duration="2000" data-aos-delay="1000">
+				<form action="" autocomplete="off">
+					<div class="my-2 p-2">
+						<input id="name" class="w-100 p-3 rounded-2 border border-1 form-control" type="text" placeholder="Full Name" name="name">
+					</div>
+					<div class="my-2 p-2">
+						<input id="email" class="w-100 p-3 rounded-2 border border-1 form-control" type="email" placeholder="Email" name="email">
+					</div>
+					<div class="my-2 p-2">
+						<input id="password" class="w-100 p-3 rounded-2 border border-1 form-control" type="password" placeholder="Password" name="password">
+					</div>
 
-                </form>
-                <div class="my-2 p-2">
-                    <a href="./login.php">Have Already Account?</a>
-                </div>
-            </div>
-        </div>
+					<div class="my-2 p-2">
+						<li id="otp" class="btn btn-primary w-100 p-2">Send OTP</li>
+					</div>
+					<div id="hide" class="d-none">
+						<span class="my-2 p-2" id="massage">
+							<div style="font-size:14px;color:red;">OTP has been sent to your email...</div>
+						</span>
+						<div class="my-2 p-2">
+							<input id="code" class="w-100 p-3 rounded-2 border border-1 form-control" type="password" placeholder="OTP" name="otp">
+						</div>
+						<div class="my-2 p-2">
+							<button id="signup" name="signup" type="submit" value="Submit" class="btn btn-success w-100 p-2">Signup</button>
+						</div>
+					</div>
 
-    </div>
+				</form>
+				<div class="my-2 p-2">
+					<a href="./login.php">Have Already Account?</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
 </div>
 <script>
 	function next() {
@@ -64,8 +66,11 @@ $genOtp = rand(1000, 9999);
 					otp: otp
 				},
 				success: function(data) {
-					$("#massage").html(data);
-                    next();
+					if (data == 'Success') {
+						next();
+					} else {
+						alert(data);
+					}
 				}
 
 			});
@@ -91,7 +96,7 @@ $genOtp = rand(1000, 9999);
 					if (data == "success") {
 						window.location.href = 'http://localhost/online-auction/index.php';
 					} else {
-						$("#response").html(data);
+						alert(data);
 					}
 				}
 
