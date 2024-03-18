@@ -50,6 +50,10 @@
   } */
 
    /* post  */
+   .liked{
+    color: blue;
+    background-color: #ccc;
+  }
    div.responsive{
     padding-bottom: 0px;
     padding-top: 0px;
@@ -102,6 +106,7 @@
     border-top-left-radius:12px ;
     border-top-right-radius:12px ;
   }
+  
   
 
   /* profile */
@@ -164,7 +169,7 @@
 }
 .name-date{
   padding-top: 7px;
-  padding-left: 15px;
+  padding-left: 30px;
 }
 /* likes 
 */

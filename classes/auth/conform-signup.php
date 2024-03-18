@@ -23,7 +23,7 @@ if (empty($name) || empty($email) || empty($password) || empty($otp) || empty($g
             $sql1 = "INSERT INTO users (name,email,password)
                  VALUES ('{$name}','{$email}','{$password}')";
             if(mysqli_query($conn,$sql1)) {
-                $sql2 = "SELECT id,name,email,role FROM users WHERE email = '{$email}'";
+                $sql2 = "SELECT id,name,email FROM users WHERE email = '{$email}'";
                 $result1 = mysqli_query($conn, $sql2) or die("Query failed.");
                 if(mysqli_num_rows($result1)>0){
                 
@@ -31,7 +31,6 @@ if (empty($name) || empty($email) || empty($password) || empty($otp) || empty($g
                         $_SESSION["name"] = $row['name'];
                         $_SESSION["email"] = $row['email'];
                         $_SESSION["id"] = $row['id'];
-                        $_SESSION["role"] = $row['role'];
                         $output = "success";
                     } 
                 }

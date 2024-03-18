@@ -29,8 +29,8 @@ if(isset($_POST['login'])){
     $email = strip_tags($_POST['email']);
     $password = strip_tags(md5($_POST['password']));
     
-    $sql = "SELECT id,name,email,role FROM users WHERE email = '{$email}' AND password ='{$password}'";
-    $result = mysqli_query($conn,$sql) or die("Query Failed.");
+    $sql = "SELECT id,name,email FROM users WHERE email = '{$email}' AND password ='{$password}'";
+    $result = mysqli_query($conn,$sql) or die("Query Failed.".$email." ". $password);
     if(mysqli_num_rows($result) > 0){
 
         while($row =mysqli_fetch_assoc($result)){
@@ -42,7 +42,7 @@ if(isset($_POST['login'])){
             header("Location:{$hostname}/index.php");
         }
     }else{
-        echo '<div class="danger text-danger">Username and Password are not match.</div>';
+        echo '<script>alert("Username and Password are not match.")</script>';
     }
 }
             ?>

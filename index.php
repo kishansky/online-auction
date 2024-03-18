@@ -12,7 +12,7 @@ include('classes/feed.php');
 
     function loadMore(start) {
         jQuery.ajax({
-            url: 'includes/feed.php',
+            url: 'includes/your-item.php',
             data: 'start=' + start,
             type: 'post',
             success: function(result) {
@@ -29,6 +29,34 @@ include('classes/feed.php');
             }
         });
     });
+    function myLike(id){
+        jQuery.ajax({
+            url: 'includes/like.php',
+            data: 'p_id=' + id,
+            type: 'post',
+            success: function(result) {
+                // console.log(result);
+                
+            }
+        });
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('valueButton')) {
+            if(event.target.style.color == "black"){
+                event.target.style.color ='blue';
+            }else{
+                event.target.style.color ='black';
+            }
+            if (event.target.textContent == 'Like') {
+                
+                event.target.textContent = 'Liked';
+            } else {
+                event.target.textContent = 'Like';
+            }
+        }
+    });
+});
 </script>
 <?php
 include('templates/footer.php');
