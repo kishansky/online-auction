@@ -7,13 +7,28 @@ include('classes/feed.php');
 
 <script src="./public/js/jquery.js"></script>
 <script>
+    var type = '<?php
+        if(isset($_GET['type'])){
+        echo $_GET['type'];
+        }else{
+            echo 0;
+        }
+    ?>';
+    var user = '<?php
+        if(isset($_GET['user'])){
+        echo $_GET['user'];
+        }else{
+            echo 0;
+        }
+    ?>'
     var load_flag = 0;
     loadMore(load_flag);
 
     function loadMore(start) {
+        // console.log(start,type);
         jQuery.ajax({
             url: 'includes/your-item.php',
-            data: 'start=' + start,
+            data: {start:start,type:type,user:user },
             type: 'post',
             success: function(result) {
                 jQuery('#feed-area').append(result);
