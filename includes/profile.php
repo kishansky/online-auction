@@ -48,20 +48,20 @@
                                 <li class="m-2"><strong>Email:</strong> <?php echo $rowprofile['email'] ?></li>
                                 <li class="m-2">
                                     <strong>Gender:</strong>
-                                    <input class="" name="gender" id="male" value="1" type="radio" <?php
+                                    <input class="" name="gender" id="male" value="male" type="radio" <?php
 
-                                                                                                    if ($rowprofile['gender'] == 1) {
+                                                                                                    if ($rowprofile['gender'] == "male") {
                                                                                                         echo "checked";
                                                                                                     }
                                                                                                     ?>>
                                     <label class="" for="male">Male</label>
-                                    <input class="" name="gender" id="female" value="2" type="radio" <?php
-                                                                                                        if ($rowprofile['gender'] == 2) {
+                                    <input class="" name="gender" id="female" value="female" type="radio" <?php
+                                                                                                        if ($rowprofile['gender'] == "female") {
                                                                                                             echo "checked";
                                                                                                         } ?>>
                                     <label class="" for="female">Female</label>
-                                    <input class="" name="gender" id="other" value="3" type="radio" <?php
-                                                                                                    if ($rowprofile['gender'] == 3) {
+                                    <input class="" name="gender" id="other" value="others" type="radio" <?php
+                                                                                                    if ($rowprofile['gender'] == "others") {
                                                                                                         echo "checked";
                                                                                                     }
                                                                                                     ?>>

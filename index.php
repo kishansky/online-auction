@@ -27,7 +27,7 @@ include('classes/feed.php');
     function loadMore(start) {
         // console.log(start,type);
         jQuery.ajax({
-            url: 'includes/your-item.php',
+            url: 'includes/feed.php',
             data: {start:start,type:type,user:user },
             type: 'post',
             success: function(result) {

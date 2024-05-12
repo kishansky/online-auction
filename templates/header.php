@@ -18,5 +18,5 @@ ob_start();
 </head>
 <body>
     <div class="container-fluid">
-      <div class="row" >
+      <div class="row p-0 " >
 

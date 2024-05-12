@@ -2,19 +2,11 @@
 include("config.php");
 session_start();
 $html = null;
-$type = $_POST['type'];
 $start = $_POST['start'];
-$user = $_POST['user'];
 if (isset($_SESSION['id'])) {
     $uid = $_SESSION['id'];
-    if ($type != 0) {
-         $sql = "SELECT products.* , users.name AS username ,users.id AS uid , users.photo , product_type.id,product_type.type AS typename  FROM products INNER JOIN users ON products.user_id = users.id LEFT JOIN product_type ON products.type = product_type.id WHERE products.type = {$type}  ORDER BY products.id DESC LIMIT $start,2";
-
-    }elseif($user != 0){
-        $sql = "SELECT products.* , users.name AS username ,users.id AS uid , users.photo , product_type.id,product_type.type AS typename  FROM products INNER JOIN users ON products.user_id = users.id LEFT JOIN product_type ON products.type = product_type.id WHERE products.user_id = {$user}  ORDER BY products.id DESC LIMIT $start,2";
-    }else{
-        $sql = "SELECT products.* , users.name AS username ,users.id AS uid , users.photo , product_type.id,product_type.type AS typename  FROM products INNER JOIN users ON products.user_id = users.id LEFT JOIN product_type ON products.type = product_type.id  ORDER BY products.id DESC LIMIT $start,2";
-    }
+    
+        $sql = "SELECT products.* , users.name AS username ,users.id AS uid , users.photo , product_type.id,product_type.type AS typename  FROM products INNER JOIN users ON products.user_id = users.id LEFT JOIN product_type ON products.type = product_type.id WHERE users.id  = $uid  ORDER BY products.id DESC LIMIT $start,2";
 
     $result = mysqli_query($conn, $sql) or die();
     if (mysqli_num_rows($result) > 0) {
@@ -24,12 +16,15 @@ if (isset($_SESSION['id'])) {
         <div class='col-1 user-img' style='padding:4px;'>
     <img src='profile_photo/" . $row['photo'] . "' alt=''/>
     </div>
-    <div class='col-11'>
+    <div class='col-9'>
     <div class='name-date'>
     <b><a href='index.php?user=".$row['uid']."' style='text-decoration:none;color:black;'>" . ucwords($row['username']) . "</a></b><br />
     <a href='index.php?type=".$row['type']."' style='font-size:12px;text-decoration:none;color:black;'><b style='padding-right:5px;'>" . $row['typename'] . "</b>" . substr($row['datetime'], 0, 10) . "</a>
  </div>
  </div>
+ <div class='col-2 text-center p-4 ps-0 '>
+<a href='auction.php?id=".$row['id']."' class='btn btn-sm btn-danger '>Show</a>
+</div>
  </div>
  </div>
  <hr class='hr'>
@@ -41,7 +36,7 @@ if (isset($_SESSION['id'])) {
     <p class='desc'>
     " . substr($row['details'], 0, 100) . "..." . "
     </p>
-    <img src='./item_image/" . $row['image_url'] . "'alt=''/>
+    <img src='./item_image/" . $row['image_url'] . "'alt='' loading='lazy'/>
 </div>
 </div>
 <div class='row' id='likes'>
