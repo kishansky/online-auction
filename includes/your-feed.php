@@ -1,12 +1,12 @@
 <?php
 include("config.php");
-session_start();
+
 $html = null;
 $start = $_POST['start'];
 if (isset($_SESSION['id'])) {
     $uid = $_SESSION['id'];
     
-        $sql = "SELECT products.* , users.name AS username ,users.id AS uid , users.photo , product_type.id,product_type.type AS typename  FROM products INNER JOIN users ON products.user_id = users.id LEFT JOIN product_type ON products.type = product_type.id WHERE users.id  = $uid  ORDER BY products.id DESC LIMIT $start,2";
+        $sql = "SELECT products.*,products.id as pid, users.name AS username ,users.id AS uid , users.photo , product_type.id,product_type.type AS typename  FROM products INNER JOIN users ON products.user_id = users.id LEFT JOIN product_type ON products.type = product_type.id WHERE users.id  = $uid AND products.status != 4  ORDER BY products.id DESC LIMIT $start,2";
 
     $result = mysqli_query($conn, $sql) or die();
     if (mysqli_num_rows($result) > 0) {
@@ -16,14 +16,17 @@ if (isset($_SESSION['id'])) {
         <div class='col-1 user-img' style='padding:4px;'>
     <img src='profile_photo/" . $row['photo'] . "' alt=''/>
     </div>
-    <div class='col-9'>
+    <div class='col-7'>
     <div class='name-date'>
     <b><a href='index.php?user=".$row['uid']."' style='text-decoration:none;color:black;'>" . ucwords($row['username']) . "</a></b><br />
     <a href='index.php?type=".$row['type']."' style='font-size:12px;text-decoration:none;color:black;'><b style='padding-right:5px;'>" . $row['typename'] . "</b>" . substr($row['datetime'], 0, 10) . "</a>
  </div>
  </div>
  <div class='col-2 text-center p-4 ps-0 '>
-<a href='auction.php?id=".$row['id']."' class='btn btn-sm btn-danger '>Show</a>
+<a href='includes/delete.php?id=".$row['pid']."' class='btn btn-sm btn-danger '>Delete</a>
+</div>
+ <div class='col-2 text-center p-4 ps-0 '>
+<a href='auction.php?id=".$row['pid']."' class='btn btn-sm btn-primary '>Show</a>
 </div>
  </div>
  </div>
@@ -41,7 +44,7 @@ if (isset($_SESSION['id'])) {
 </div>
 <div class='row' id='likes'>
 <div class='col-12 m-2'>";
-            $sql2 = "SELECT * FROM preferences WHERE product_id ={$row['id']} AND preference='like'";
+            $sql2 = "SELECT * FROM preferences WHERE product_id ={$row['pid']} AND preference='like'";
             $result2 = mysqli_query($conn, $sql2) or die();
             if (mysqli_num_rows($result2) > 0) {
                 $html .= "<div class=''>
@@ -61,12 +64,12 @@ if (isset($_SESSION['id'])) {
 <div class='row' id='b-likes'>
 <div class='col-6 '>
 <div class='b-like'>";
-            $sql3 = "SELECT * FROM preferences WHERE product_id ={$row['id']} AND preference='like' AND user_id ={$uid}";
+            $sql3 = "SELECT * FROM preferences WHERE product_id ={$row['pid']} AND preference='like' AND user_id ={$uid}";
             $result3 = mysqli_query($conn, $sql3) or die();
             if (mysqli_num_rows($result3) > 0) {
-                $html .= "<button class='btn-like valueButton ' onclick='myLike(" . $row['id'] . ")' style='font-size:18px;color:blue;'>Liked</button>";
+                $html .= "<button class='btn-like valueButton ' onclick='myLike(" . $row['pid'] . ")' style='font-size:18px;color:blue;'>Liked</button>";
             } else {
-                $html .= "<button class='btn-like valueButton' onclick='myLike(" . $row['id'] . ")' style='font-size:18px;color:black;'>Like</button>";
+                $html .= "<button class='btn-like valueButton' onclick='myLike(" . $row['pid'] . ")' style='font-size:18px;color:black;'>Like</button>";
             }
             $html .= "
 </div>

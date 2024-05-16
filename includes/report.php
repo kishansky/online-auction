@@ -1,7 +1,6 @@
 <?php 
 include("config.php");
-ob_start();
-session_start();
+
 
 $description = $_POST['description'];
 $post_id = $_POST['id'];

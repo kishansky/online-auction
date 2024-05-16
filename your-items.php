@@ -10,7 +10,7 @@ include('classes/feed.php');
    
     var load_flag = 0;
     loadMore(load_flag);
-
+    var load = false;
     function loadMore(start) {
         // console.log(start,type);
         jQuery.ajax({
@@ -20,6 +20,7 @@ include('classes/feed.php');
             success: function(result) {
                 jQuery('#feed-area').append(result);
                 load_flag += 2;
+                load = true;
             }
         });
     }
@@ -27,7 +28,10 @@ include('classes/feed.php');
 
         jQuery(window).scroll(function() {
             if (jQuery(window).scrollTop() >= jQuery(document).height() - jQuery(window).height() - 150) {
-                loadMore(load_flag);
+                if(load == true){
+                    loadMore(load_flag);
+                   load = false;
+                }
             }
         });
     });

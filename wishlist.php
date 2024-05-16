@@ -7,37 +7,18 @@ include('classes/feed.php');
 
 <script src="./public/js/jquery.js"></script>
 <script>
-    var type = '<?php
-        if(isset($_GET['type'])){
-        echo $_GET['type'];
-        }else{
-            echo 0;
-        }
-    ?>';
-    var user = '<?php
-        if(isset($_GET['user'])){
-        echo $_GET['user'];
-        }else{
-            echo 0;
-        }
-    ?>'
-    var search_value = '<?php
-        if(isset($_GET['search'])){
-        echo $_GET['search'];
-        }else{
-            echo '';
-        }
-    ?>';
+    
     var load_flag = 0;
     loadMore(load_flag);
     var load = false;
     function loadMore(start) {
-        console.log(start,type);
+        // console.log(start,type);
         jQuery.ajax({
-            url: 'includes/feed.php',
-            data: {start:start,type:type,user:user,search:search_value},
+            url: 'includes/wishlist.php',
+            data: {start:start},
             type: 'post',
             success: function(result) {
+                // console.log(result);
                 jQuery('#feed-area').append(result);
                 load_flag += 2;
                 load = true;

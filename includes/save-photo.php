@@ -1,7 +1,7 @@
 
 <?php
 include("config.php");
-session_start();
+
 $uid = $_SESSION["id"];
 $random = rand(1000, 9999);
 if(isset($_FILES['fileToUpload'])){

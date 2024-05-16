@@ -2,6 +2,7 @@
 </div>
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
+
   AOS.init();
   let data = [];
   data.push("Search");
@@ -14,6 +15,8 @@
       data.push('<?php echo ucfirst($rowtype['type']); ?>');
   <?php
     }
+  }else{
+    echo "console.log('error');";
   }
   ?>
   // console.log(data);
@@ -27,6 +30,12 @@
     }
   }
   setInterval(loop, 4000);
+
+  function search(){
+    let search = document.getElementById('search');
+    let searchvalue = search.value;
+    window.location.href=`index.php?search=${searchvalue}`;
+  }
   // console.log(a);
 </script>
 </body>

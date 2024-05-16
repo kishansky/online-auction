@@ -1,19 +1,22 @@
 <?php
 include("config.php");
-session_start();
+
 $html = null;
 $type = $_POST['type'];
 $start = $_POST['start'];
 $user = $_POST['user'];
+$search = $_POST['search'];
 if (isset($_SESSION['id'])) {
     $uid = $_SESSION['id'];
     if ($type != 0) {
-         $sql = "SELECT products.* , users.name AS username ,users.id AS uid , users.photo , product_type.id,product_type.type AS typename  FROM products INNER JOIN users ON products.user_id = users.id LEFT JOIN product_type ON products.type = product_type.id WHERE products.type = {$type}  ORDER BY products.id DESC LIMIT $start,2";
+         $sql = "SELECT products.*,products.id as pid , users.name AS username ,users.id AS uid , users.photo , product_type.id,product_type.type AS typename  FROM products INNER JOIN users ON products.user_id = users.id LEFT JOIN product_type ON products.type = product_type.id WHERE products.type = {$type} AND products.status = 0  ORDER BY products.id DESC LIMIT $start,2";
 
     }elseif($user != 0){
-        $sql = "SELECT products.* , users.name AS username ,users.id AS uid , users.photo , product_type.id,product_type.type AS typename  FROM products INNER JOIN users ON products.user_id = users.id LEFT JOIN product_type ON products.type = product_type.id WHERE products.user_id = {$user}  ORDER BY products.id DESC LIMIT $start,2";
+        $sql = "SELECT products.*,products.id as pid , users.name AS username ,users.id AS uid , users.photo , product_type.id,product_type.type AS typename  FROM products INNER JOIN users ON products.user_id = users.id LEFT JOIN product_type ON products.type = product_type.id WHERE products.user_id = {$user} AND products.status = 0  ORDER BY products.id DESC LIMIT $start,2";
+    } elseif ($search != '' && strlen($search) > 2) {
+        $sql = "SELECT products.*,products.id as pid , users.name AS username ,users.id AS uid , users.photo , product_type.id,product_type.type AS typename  FROM products INNER JOIN users ON products.user_id = users.id LEFT JOIN product_type ON products.type = product_type.id WHERE products.name LIKE '%{$search}%' OR products.details  LIKE '%{$search}%' OR product_type.type  LIKE '%{$search}%' OR users.name  LIKE '%{$search}%' AND products.status = 0 ORDER BY products.id DESC LIMIT $start,2";
     }else{
-        $sql = "SELECT products.* , users.name AS username ,users.id AS uid , users.photo , product_type.id,product_type.type AS typename  FROM products INNER JOIN users ON products.user_id = users.id LEFT JOIN product_type ON products.type = product_type.id  ORDER BY products.id DESC LIMIT $start,2";
+        $sql = "SELECT products.*,products.id as pid , users.name AS username ,users.id AS uid , users.photo , product_type.id,product_type.type AS typename  FROM products INNER JOIN users ON products.user_id = users.id LEFT JOIN product_type ON products.type = product_type.id WHERE products.status = 0 ORDER BY products.id DESC LIMIT $start,2";
     }
 
     $result = mysqli_query($conn, $sql) or die();
@@ -31,7 +34,7 @@ if (isset($_SESSION['id'])) {
  </div>
  </div>
  <div class='col-2 text-center p-4 ps-0 '>
-<a href='auction.php?id=".$row['id']."' class='btn btn-sm btn-danger '>Show</a>
+<a href='auction.php?id=".$row['pid']."' class='btn btn-sm btn-primary '>Show</a>
 </div>
  </div>
  </div>
@@ -49,7 +52,7 @@ if (isset($_SESSION['id'])) {
 </div>
 <div class='row' id='likes'>
 <div class='col-12 m-2'>";
-            $sql2 = "SELECT * FROM preferences WHERE product_id ={$row['id']} AND preference='like'";
+            $sql2 = "SELECT * FROM preferences WHERE product_id ={$row['pid']} AND preference='like'";
             $result2 = mysqli_query($conn, $sql2) or die();
             if (mysqli_num_rows($result2) > 0) {
                 $html .= "<div class=''>
@@ -69,12 +72,12 @@ if (isset($_SESSION['id'])) {
 <div class='row' id='b-likes'>
 <div class='col-6 '>
 <div class='b-like'>";
-            $sql3 = "SELECT * FROM preferences WHERE product_id ={$row['id']} AND preference='like' AND user_id ={$uid}";
+            $sql3 = "SELECT * FROM preferences WHERE product_id ={$row['pid']} AND preference='like' AND user_id ={$uid}";
             $result3 = mysqli_query($conn, $sql3) or die();
             if (mysqli_num_rows($result3) > 0) {
-                $html .= "<button class='btn-like valueButton ' onclick='myLike(" . $row['id'] . ")' style='font-size:18px;color:blue;'>Liked</button>";
+                $html .= "<button class='btn-like valueButton ' onclick='myLike(" . $row['pid'] . ")' style='font-size:18px;color:blue;'>Liked</button>";
             } else {
-                $html .= "<button class='btn-like valueButton' onclick='myLike(" . $row['id'] . ")' style='font-size:18px;color:black;'>Like</button>";
+                $html .= "<button class='btn-like valueButton' onclick='myLike(" . $row['pid'] . ")' style='font-size:18px;color:black;'>Like</button>";
             }
             $html .= "
 </div>

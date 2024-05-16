@@ -56,8 +56,8 @@
 
                     $biddate= strip_tags($_POST['bid_date']);
                     $enddate = strtotime($biddate) + 900;
-                    $biddate = date("Y-m-d h:i:s", strtotime($biddate));
-                    $enddate = date("Y-m-d h:i:s", $enddate);
+                    $biddate = date("Y-m-d H:i:s", strtotime($biddate));
+                    $enddate = date("Y-m-d H:i:s", $enddate);
 
                     // echo $biddate;
                     $name = strip_tags($_POST['name']);

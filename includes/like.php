@@ -1,6 +1,6 @@
 <?php
 include("config.php");
-session_start();
+// session_start();
 // $html = "nn";
 $p_id = $_POST['p_id'];
 
