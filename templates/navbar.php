@@ -22,10 +22,10 @@
             Profile
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item<?= $page == 'profile.php'? 'active':'' ?> "href="profile.php">Profile Details</a></li>
-            <li><a class="dropdown-item<?= $page == 'add-item.php'? 'active':'' ?>" href="add-item.php">Add New Item</a></li>
-            <li><a class="dropdown-item<?= $page == 'your-items.php'? 'active':'' ?>" href="your-items.php">Your Item</a></li>
-            <li><a class="dropdown-item<?= $page == 'purchase.php'? 'active':'' ?>" href="purchase.php">Purchase Item</a></li>
+            <li><a class="dropdown-item <?= $page == 'profile.php'? 'active':'' ?> "href="profile.php">Profile Details</a></li>
+            <li><a class="dropdown-item <?= $page == 'add-item.php'? 'active':'' ?>" href="add-item.php">Add New Item</a></li>
+            <li><a class="dropdown-item <?= $page == 'your-items.php'? 'active':'' ?>" href="your-items.php">Your Item</a></li>
+            <li><a class="dropdown-item <?= $page == 'purchase.php'? 'active':'' ?>" href="purchase.php">Purchase Item</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="./classes/auth/logout.php">Logout</a></li>
           </ul>
